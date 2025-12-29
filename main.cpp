@@ -2,13 +2,21 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <map>
 #include "include/bintohex.h"
 
 int main(){
-    std::ifstream is("testimage.jpg", std::ios::binary);
+    std::ifstream is("cat.png", std::ios::binary);
     int length = 4;
     std::string binStr;
     std::vector<std::string> hexArr;
+
+    //TODO: Expand the list with more file formats
+    //TODO: Improve the readablity of the below vector (this can be problematic once the list gets larger)
+    std::map<std::string, std::string> formats = {
+        {"FFD8FFE0", "JPEG"},
+        {"89504E47", "PNG"}
+    };
 
     //TODO: Add a function that will tell the user the format of the file. (Probably using some kind of std::map is the best solution)
 
@@ -31,7 +39,8 @@ int main(){
         }
 
         std::cout << "Hex values of first " << length << " bytes of the file: " << binutil::binaryToHexadecimal(binStr) << std::endl;
-
+        std::cout << "The file is a " << formats[binutil::binaryToHexadecimal(binStr)] << " file." << std::endl;
+        //TODO: Add better error handling (in case when the format is not found) 
     }
     else{
         std::cout << "Failed to open the file!" << std::endl;
