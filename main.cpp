@@ -27,18 +27,11 @@ int main(){
             }
 
             std::cout << ' ';
-            hexArr.push_back(binutil::binaryToHexadecimal(binStr));
-            binStr = ""; // clear the string
             std::cout << '\n';
         }
 
-        //TODO: Fix the cout below
-        //ISSUE: Output looks like this: "t  bytes of the opened image:"
-        std::cout << "First " + length << " bytes of the opened image: ";
-        for(auto hex : hexArr){
-            std::cout << hex << " ";
-        }
-        std::cout << '\n';
+        std::cout << "Hex values of first " << length << " bytes of the file: " << binutil::binaryToHexadecimal(binStr) << std::endl;
+
     }
     else{
         std::cout << "Failed to open the file!" << std::endl;
