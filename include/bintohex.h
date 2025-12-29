@@ -6,7 +6,7 @@
 
 namespace binutil {
 
-    inline std::string binaryToHexadecimal(std::string binary)
+    inline std::string bintohex(std::string binary)
     {
         while (binary.length() % 4 != 0)
         {

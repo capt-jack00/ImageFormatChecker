@@ -38,8 +38,8 @@ int main(){
             std::cout << '\n';
         }
 
-        std::cout << "Hex values of first " << length << " bytes of the file: " << binutil::binaryToHexadecimal(binStr) << std::endl;
-        std::cout << "The file is a " << formats[binutil::binaryToHexadecimal(binStr)] << " file." << std::endl;
+        std::cout << "Hex values of first " << length << " bytes of the file: " << binutil::bintohex(binStr) << std::endl;
+        std::cout << "The file is a " << formats[binutil::bintohex(binStr)] << " file." << std::endl;
         //TODO: Add better error handling (in case when the format is not found) 
     }
     else{
