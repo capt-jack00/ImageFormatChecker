@@ -7,8 +7,8 @@
 
 int main(){
     //TODO: Add an option for the user to manually choose the file directory
-    std::ifstream is("cat.png", std::ios::binary);
-    int length = 4;
+    std::ifstream is("/home/tytus/Music/oklaski.mp3", std::ios::binary);
+    int length = 10;
     std::string binStr;
     std::vector<std::string> hexArr;
 
@@ -17,25 +17,16 @@ int main(){
     std::map<std::string, std::string> formats = {
         {"FFD8FFE0", "JPEG"},
         {"89504E47", "PNG"},
-        {"47494638", "GIF"},
-        {"25504446", "PDF"},
-        {"424D", "BMP"},
-        {"49492A00", "TIFF"},
-        {"4D4D002A", "TIFF"},
-        {"52494646", "WAV"},
-        {"ID3", "MP3"},
-        {"FFFE4500", "EXE"},
-        {"7F454C46", "ELF"},
+        {"494433", "MP3"},
+        {"5A4D", "EXE"}
     };
-
-    //TODO: Add a function that will tell the user the format of the file. (Probably using some kind of std::map is the best solution)
 
     if (is) {
         std::cout << "Opened the file" << std::endl;
         char * buffer = new char[length]; // raw bytes are being stored here in an array
         is.read(buffer, length);
         
-        for (size_t i = 0; i < length; ++i) {
+        for (size_t i = 0; i >= 0; ++i) {
             unsigned char byte = static_cast<unsigned char>(buffer[i]);
 
             std::cout << "Byte: ";
@@ -46,6 +37,11 @@ int main(){
 
             std::cout << ' ';
             std::cout << '\n';
+
+            //WARNING: This may be a bit dangerous. Every time when format is not found a new element in std::map is being created. It can easlily cause errors!
+            if(formats[binutil::bintohex(binStr)] != ""){
+                break;
+            }
         }
 
         std::cout << "Hex values of first " << length << " bytes of the file: " << binutil::bintohex(binStr) << std::endl;
