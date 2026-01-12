@@ -5,9 +5,21 @@
 #include <map>
 #include "include/bintohex.h"
 
-int main(){
+//TODO: Write a detailed documentation for the code.
+
+int main(int argc, char* argv[]){
+    // Arguments
+    std::string imgPath;
+    if(argc == 2){
+        imgPath = argv[1];
+    }
+    else{
+        std::cout << "Incorrect amount of arguments provided!" << std::endl;
+        return 0;
+    }
+
     //TODO: Add an option for the user to manually choose the file directory
-    std::ifstream is("/home/tytus/Music/oklaski.mp3", std::ios::binary);
+    std::ifstream imgStream(imgPath, std::ios::binary);
     int length = 10;
     std::string binStr;
     std::vector<std::string> hexArr;
@@ -21,10 +33,11 @@ int main(){
         {"5A4D", "EXE"}
     };
 
-    if (is) {
+    if (imgStream) {
         std::cout << "Opened the file" << std::endl;
+        std::cout << imgPath << std::endl;
         char * buffer = new char[length]; // raw bytes are being stored here in an array
-        is.read(buffer, length);
+        imgStream.read(buffer, length);
         
         for (size_t i = 0; i >= 0; ++i) {
             unsigned char byte = static_cast<unsigned char>(buffer[i]);
